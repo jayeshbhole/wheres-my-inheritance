@@ -69,13 +69,13 @@ contract BasicSwitch is Ownable, AccessControl, IBasicSwitch {
     }
 
     // Claim operations
-    function claimInheritance() public override onlyHeir {
+    function claimInheritance() public override {
         if (block.number - lastAlive > expectancy) {
             heir.transfer(address(this).balance);
         }
     }
 
-    function claimInheritanceERC20() public onlyHeir {
+    function claimInheritanceERC20() public {
         if (block.number - lastAlive > expectancy) {
             _transferErc20Tokens();
         }
@@ -93,13 +93,13 @@ contract BasicSwitch is Ownable, AccessControl, IBasicSwitch {
         for (uint256 i = 0; i < erc20Tokens.length; i++) {
             if (erc20Status[erc20Tokens[i]] == 1) {
                 uint allowance = ERC20(erc20Tokens[i]).allowance(
-                    msg.sender,
+                    owner(),
                     address(this)
                 );
 
                 uint amount = allowance >
                     ERC20(erc20Tokens[i]).balanceOf(owner())
-                    ? ERC20(erc20Tokens[i]).balanceOf(msg.sender)
+                    ? ERC20(erc20Tokens[i]).balanceOf(owner())
                     : allowance;
 
                 ERC20(erc20Tokens[i]).transferFrom(owner(), heir, amount);
