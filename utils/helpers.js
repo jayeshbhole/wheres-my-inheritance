@@ -1,6 +1,7 @@
 const { ethers } = require("hardhat");
 
 const bigNumFrom = (v) => ethers.BigNumber.from(v);
+const bigNumToString = (v) => ethers.BigNumber.from(v).toString();
 
 const dec = (val, scale) => {
   let zerosCount;
@@ -19,4 +20,5 @@ const dec = (val, scale) => {
 module.exports = {
   bigNumFrom,
   dec,
+  bigNumToString,
 };
