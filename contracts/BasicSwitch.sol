@@ -36,6 +36,16 @@ contract BasicSwitch is Ownable, AccessControl, IBasicSwitch {
     }
 
     // External Functions
+    function getHeir() public view returns (address) {
+        return heir;
+    }
+
+    function changeHeir(address _heir) public onlyOwner {
+        _revokeRole(HEIR_ROLE, heir);
+        heir = payable(_heir);
+        _setupRole(HEIR_ROLE, _heir);
+    }
+
     function keepAlive() external payable override onlyOwner {
         lastAlive = block.number;
     }
