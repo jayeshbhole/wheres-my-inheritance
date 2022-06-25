@@ -18,7 +18,7 @@ async function main() {
   // We get the contract to deploy
   const BasicSwitch = await hre.ethers.getContractFactory("BasicSwitch");
   const basicSwitch = await BasicSwitch.deploy(10, "0x3C5F48fAee7f50603071de0DaE955EAFb5293c46", {
-    value: bigNumFrom(dec(1000, "ether")),
+    value: bigNumFrom(dec(1, "ether")),
   });
 
   await basicSwitch.deployed();
