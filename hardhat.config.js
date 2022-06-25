@@ -27,19 +27,27 @@ module.exports = {
     localhost: {
       allowUnlimitedContractSize: true,
       url: "http://localhost:8545",
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: [process.env.PRIVATE_KEY, process.env.PRIVATE_KEY2],
     },
     hardhat: {
       allowUnlimitedContractSize: true,
-      // forking: {
-      //   enabled: true,
-      //   url: "", // Mainnet
-      //   blockNumber: 1,
-      // },
+      forking: {
+        enabled: true,
+        url: process.env.GOERLI_URL, // Mainnet
+        blockNumber: 7119294,
+      },
+      mining: {
+        auto: true,
+        interval: 0,
+      },
       accounts: [
         {
           privateKey: process.env.PRIVATE_KEY,
           balance: "10000000000000000000000000000000000000000000000000",
+        },
+        {
+          privateKey: process.env.PRIVATE_KEY2,
+          balance: "1000000000000000000000",
         },
       ],
     },
