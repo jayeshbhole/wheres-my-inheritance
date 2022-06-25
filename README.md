@@ -1,42 +1,33 @@
-# Advanced Sample Hardhat Project
+# Deadman's Switch Proof of Concept
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+This project demonstrates a proof of concept for a deadman's switch.
+The deadman's switch is a simple contract that allows the owner to
+deposit ether to the contract. The contract will then allow the `heir` of the user to claim the inheritance `user` has deposited.
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+Inheritance is can be in the form of Ether or ERC20 tokens.
 
-Try running some of the following tasks:
+## Relevant Scripts
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.js
-node scripts/deploy.js
-npx eslint '**/*.js'
-npx eslint '**/*.js' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+### `Compile`
+
+```bash
+    npx hardhat compile
 ```
 
-# Etherscan verification
+### `Run a local node`
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
-
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
-
-```shell
-hardhat run --network ropsten scripts/deploy.js
+```bash
+    npx hardhat node --network hardhat
 ```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+### `Deploy`
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
+```bash
+    npx hardhat deploy --network localhost
+```
+
+### `Test`
+
+```bash
+    npx hardhat test --network localhost
 ```
