@@ -12,13 +12,11 @@ contract BasicSwitch is Ownable, AccessControl, IBasicSwitch {
     using Address for address;
 
     // Define HEIR_ROLE for the AccessControl contract
-    bytes32 public constant HEIR_ROLE = keccak256("HEIR_ROLE");
-
-    uint256 lastAlive;
+    bytes32 internal constant HEIR_ROLE = keccak256("HEIR_ROLE");
     uint256 internal expectancy;
-
     address payable internal heir;
 
+    uint256 public lastAlive;
     // array of ERC20 token addresses included in the switch
     address[] public erc20Tokens;
 
@@ -32,6 +30,8 @@ contract BasicSwitch is Ownable, AccessControl, IBasicSwitch {
 
     constructor(uint256 _expectancy, address _heir) payable {
         expectancy = _expectancy;
+        heir = payable(_heir);
+        lastAlive = block.number;
         _setupRole(HEIR_ROLE, _heir);
     }
 
