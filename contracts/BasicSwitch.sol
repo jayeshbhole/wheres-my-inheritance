@@ -70,15 +70,15 @@ contract BasicSwitch is Ownable, AccessControl, IBasicSwitch {
 
     // Claim operations
     function claimInheritance() public override {
-        if (block.number - lastAlive > expectancy) {
-            heir.transfer(address(this).balance);
-        }
+        require(block.number - lastAlive > expectancy, "Owner is alive");
+
+        heir.transfer(address(this).balance);
     }
 
     function claimInheritanceERC20() public {
-        if (block.number - lastAlive > expectancy) {
-            _transferErc20Tokens();
-        }
+        require(block.number - lastAlive > expectancy, "Owner is alive");
+
+        _transferErc20Tokens();
     }
 
     // Private Functions
